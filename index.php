@@ -39,3 +39,19 @@ echo "La phrase contient $nbMots mots<br>";
 $tailleTableau1 = count($tableau1);
 echo "Le tableau 1 contient $tailleTableau1 éléments<br>";
 echo "Le tableau 2 contient ".count($tableau2)." éléments<br>";
+
+// Accéder à la première valeur du tableau. Attention le premier élément a l'indice 0.
+echo $tableau1[0];
+
+$notes = [12, 14, 9, 8, 19, 17.25];
+$nbNotes = count($notes);
+$sommeNotes = array_sum($Notes);
+$moyenne = round($sommeNotes/$nbNotes, 2);
+echo "La moyenne est $moyenne<br>";
+
+// OPERATIONS MATHEMATIQUES
+
+$nbArticles = 5;
+$prix = 10.99;
+$totalHT = $nbArticles * $prix;
+echo "Le total HT est de $totalHT €<br>";
