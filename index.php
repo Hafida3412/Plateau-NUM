@@ -191,3 +191,124 @@ echo "<h3>Méthode foreach</h3>";
 foreach($marques as $marque) {
     echo $marque."<br>";
 }
+
+// TABLEAUX ASSOCIATIFS
+// clé (key) -> valeur (value) (clé doit être unique)
+
+$formateurs = [
+    "stephane" => "mulhouse",
+    "virgile" => "strasbourg",
+    "micka" => "strasbourg",
+    "dominique" => "colmar"
+];
+
+var_dump($formateurs);
+
+// ksort -> trier sur la clé (A à Z)
+// krsort -> trier sur la clé (Z à A) r = reverse
+// asort -> trier sur la valeur (A à Z)
+// arsort -> trier sur la valeur (Z à A)
+
+ksort($formateurs);
+
+foreach($formateurs as $prenom => $ville) {
+    echo ucfirst($prenom)." habite ".mb_strtoupper($ville)."<br>";
+}
+
+
+$clients = [
+    "stephane" => [
+        "adresse" => "10 rue de la Gare",
+        "cp" => "67000",
+        "ville" => "STRASBOURG",
+        "tel" => "0988776666"
+    ],
+
+    "virgile" => [
+        "adresse" => "1 rue Principale",
+        "cp" => "68100",
+        "ville" => "MULHOUSE",
+        "tel" => "0677889999"
+    ]
+];
+
+var_dump($clients);
+// echo $clients["virgile"]["cp"]." ".$clients["virgile"]["ville"];
+
+foreach($clients as $prenom => $coordonnees) {
+    echo ucfirst($prenom)." habite ".
+                $coordonnees["adresse"]." ".$coordonnees["cp"]." ".$coordonnees["ville"]." et a comme n° de téléphone : ".$coordonnees["tel"]."<br>";
+}
+
+
+// FONCTIONS
+
+echo afficherMessage(); 
+
+function afficherMessage() : string {
+    $message = "Voici mon message<br>";
+    return $message;
+}
+
+echo calculerCarre(3);  // 9
+echo calculerCarre("test");  // Erreur !
+// echo pow(9, 3);
+
+function calculerCarre($nombre) {
+    if(gettype($nombre) == "integer") {
+        $resultat = $nombre * $nombre;
+        return $resultat."<br>";
+    } else {
+        return "Erreur: la valeur doit être un entier !<br>";
+    }
+}
+
+
+echo calculerMoyenne([9, 10.5, 11, 18, 12])."<br>";
+echo calculerMoyenne([19, 10, 3, 8, 19])."<br>";
+
+$eleves = [
+    "cindy" => [12, 9, 19, 17, 12, 13],
+    "pascal" => [8, 9, 12, 10, 17]
+];
+
+foreach($eleves as $prenom => $notes) {
+    echo "La moyenne de $prenom est : ".calculerMoyenne($notes)."<br>";
+}
+
+function calculerMoyenne(array $notes) : float {
+    $nbNotes = count($notes);
+    $sommeNotes = array_sum($notes);
+    $moyenne = round($sommeNotes / $nbNotes, 2);
+
+    return $moyenne;
+}
+
+echo pairOuImpair(4);
+echo pairOuImpair(5);
+
+function pairOuImpair($nombre) : string {
+
+    if($nombre % 2 == 0) {   // % = modulo
+        $resultat = "pair<br>";
+    } else {
+        $resultat = "impair<br>";
+    }
+
+    return "$nombre est $resultat";
+}
+
+echo repeterMot("Youpi", 6, " - ");
+echo repeterMot("Hourra", 6, " / ");
+
+function repeterMot(string $mot, int $nbRepetitions, string $separateur) {
+
+    $resultat = "";
+    foreach(range(1, $nbRepetitions) as $valeur) {
+        $resultat .= $mot.$separateur;
+    }
+
+    return $resultat;
+}
+
+echo str_repeat("Bidule", 10);
